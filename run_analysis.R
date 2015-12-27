@@ -5,6 +5,8 @@
 ###    the correpsonding columns in `df` for each activity and 
 ###    each subject.
 
+#### Code to produce `df`
+
 # Download zipped data file if it does not exist, and extract. ----
 zipname = "UCI_HAR.zip"
 if (!file.exists(zipname)) {
@@ -56,3 +58,44 @@ getMergedFile <- function (case) {
 ## with the specified columns, descriptive variable names,
 ## and descriptive activity names.
 df <- rbind(getMergedFile("test"),getMergedFile("train"))
+varNames = names(df)
+varNames <- gsub("\\.", "", varNames)
+varNames <- gsub("mean", "MEAN", varNames)
+varNames <- gsub("std", "STD", varNames)
+names(df) <- varNames
+
+#### Code to product `avgdf`
+
+library(dplyr)
+
+df <- mutate(df, Act_Subj = paste(as.character(Activity),
+                            as.character(Subject),
+                            sep = "."))
+# s is a list of data frames, where each matches a combination
+# of activity and subject.
+s <- split(df,df$Act_Subj) 
+s <- lapply(s, function(elt) { # Remove non-numeric columns
+        elt$Subject <- NULL
+        elt$Activity <- NULL
+        elt$Act_Subj <- NULL
+        elt
+     })
+
+# s is a list of dataframes.
+# Why is it that the following works:
+#    apply(s[[1]], 2, mean)
+# but not 
+#    lapply(s, apply, MARGIN = 2, FUN = mean)
+
+avgdf <- NULL
+for(i in 1:length(s)) {
+    # Build `avgdf` by averaging every column for each 
+    # data frame in `s`, and add the result as a row to `avgdf`.
+    avgdf <- rbind(avgdf, apply(s[[i]], 2, mean))
+}
+# Add descriptive column names.
+avgdf <- data.frame(avgdf, row.names = names(s))
+# Add a column of identifiers for each row.
+avgdf <- data.frame(Act_Subj = names(s), avgdf)
+
+write.table(avgdf, file = "meanByActSubj.txt", row.names = FALSE)
