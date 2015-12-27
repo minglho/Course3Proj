@@ -1,3 +1,10 @@
+### This file produces 
+### 1. the data frame `df` that is the merged data set satisfying
+###    the project spec.
+### 2. the data frame `avgdf` whose columns are the average of 
+###    the correpsonding columns in `df` for each activity and 
+###    each subject.
+
 # Download zipped data file if it does not exist, and extract. ----
 zipname = "UCI_HAR.zip"
 if (!file.exists(zipname)) {
@@ -12,7 +19,7 @@ if (!file.exists("UCI HAR Dataset")) unzip(zipname)
 dfF <- ## Read data frame of features
     read.table("UCI HAR Dataset/features.txt") 
 colMask <- grepl("mean\\(\\)",dfF[,2]) | grepl("std\\(\\)",dfF[,2])
-colClasses = rep("NULL", n)
+colClasses = rep("NULL", nrow(dfF))
 colClasses[colMask] <- "numeric"
 
 # Create table of activity labels
@@ -42,13 +49,10 @@ getMergedFile <- function (case) {
     dfSubj <- read.table(subjFile, col.names = "Subject")
     
     
-    cbind(dfsubj, dfData, dfLabels$Activity)
+    cbind(dfSubj, dfData, Activity = dfLabels$Activity)
 }
 
 ## Data frame `df` is the training and test sets merged ----
 ## with the specified columns, descriptive variable names,
 ## and descriptive activity names.
 df <- rbind(getMergedFile("test"),getMergedFile("train"))
-
-
-
