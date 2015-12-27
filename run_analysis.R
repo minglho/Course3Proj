@@ -98,4 +98,5 @@ avgdf <- data.frame(avgdf, row.names = names(s))
 # Add a column of identifiers for each row.
 avgdf <- data.frame(Act_Subj = names(s), avgdf)
 
-write.table(avgdf, file = "meanByActSubj.txt", row.names = FALSE)
+write.table(avgdf, file = "meanByActSubj.txt", 
+            row.names = FALSE, quote = FALSE)
