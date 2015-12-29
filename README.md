@@ -24,7 +24,7 @@ For each data set, the three files are merged together, retaining only the varia
 
 ### Transforming the variable names
 
-The variable names in the raw data include the three characters for left parenthesis, right parenthesis, and space. When reading these as a character vector used for the parameter `col.names` in `read.table()`, these three characters were turned into periods. To clean up, these periods were removed from the variable names, and the character strings "mean" and "sd" in the variable names were turned to uppercase for ease of reading.
+The variable names in the raw data include the three characters for left parenthesis, right parenthesis, and hyphen. When reading these as a character vector used for the parameter `col.names` in `read.table()`, these three characters were turned into periods. To clean up, these periods were removed from the variable names, and the character strings "mean" and "sd" in the variable names were turned to uppercase for ease of reading.
 
 ## Creating a summarized data set
 
