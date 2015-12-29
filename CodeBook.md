@@ -10,7 +10,7 @@ In `meanByActSubj.txt`, each observation represents a subject performing a speci
 * Activity: 6 levels: LAYING, SITTING, STANDING, WALKING, WALKING_DOWNSTAIRS and WALKING_UPSTAIRS. It is the type of activity performed when the corresponding measurements were taken
 * Subject: Code used to identify the subjects, ranging from 1 to 30.
 
-The following variables have counterparts in the raw data.
+The following variables have counterparts in the raw data. The range for them are -1 to 1.
 
 * tBodyAccMEANX
 * tBodyAccMEANY
