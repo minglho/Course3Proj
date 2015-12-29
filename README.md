@@ -30,5 +30,6 @@ The variable names in the raw data include the three characters for left parenth
 
 The output file `meanByActSubj.txt` summarizes the raw data by taking the mean of the subset of each measurement variable matching each activity and each subject. To facilitate this, we create in `df` the variable `Act_Subj` concatenating the variables `Activity` and `Subject`. 
 
-We the split `df` into a list `s` of data frames by `df$Act_Subj`. For each data frame in `s`, we remove those variables that are not measurement variables to obtain only numerical values, so that the mean of each measurement variable can easily be taken using `apply()`. The results of applying `apply()` to each data frame in `s` are combined to form the data frame `avgdf`, which will be written out to `meanByActSubj.txt` with a header but without row names. See `CodeBook.md` for a complete set of variables.
+We the split `df` into a list `s` of data frames by `df$Act_Subj`. For each data frame in `s`, we remove those variables that are not measurement variables to obtain only numerical values, so that the mean of each measurement variable can easily be taken using `apply()`. The results of applying `apply()` to each data frame in `s` are combined to form the data frame `avgdf`, which will be written out to `meanByActSubj.txt` with a header but without row names. We also split `names(s)` to form the variables `Activity` and `Subject` for the tidy data set `avgdf`. 
 
+See `CodeBook.md` for a complete set of variables.

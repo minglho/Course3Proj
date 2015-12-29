@@ -95,8 +95,19 @@ for(i in 1:length(s)) {
 }
 # Add descriptive column names.
 avgdf <- data.frame(avgdf, row.names = names(s))
-# Add a column of identifiers for each row.
-avgdf <- data.frame(Act_Subj = names(s), avgdf)
+
+# Get Acitivity and Subject columns for tidy data set.
+id <- names(s)
+Act <- NULL
+Subj <- NULL
+for (i in 1:length(id)) {
+    varList <- strsplit(id[i],"\\.")
+    Act <- c(Act, varList[[1]][1])
+    Subj <- c(Subj, varList[[1]][2])
+}
+
+# Add Acitivity and Subject columns for tidy data set.
+avgdf <- data.frame(Activity = Act, Subject = Subj, avgdf)
 
 write.table(avgdf, file = "meanByActSubj.txt", 
             row.names = FALSE, quote = FALSE)
