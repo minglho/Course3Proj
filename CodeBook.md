@@ -7,7 +7,8 @@ The space-delimited file `meanByActSubj.txt` contains a header. It is the result
 In `meanByActSubj.txt`, each observation represents a subject performing a specific activity. Each variable represents the mean of the subset of the corresponding variable in the raw data that match the given subject performing the specified activity. In `meanByActSubj.txt`, only the summary statistics of mean and standard deviations from the raw data is included. Refer to `features_info.txt` in the zip file containing the raw data for the variables in there. 
 
 ## List of variables
-* Act_Subj: Values for this variable has two components separated by a period: The name of the activity and the code for the subject performing the activity. 
+* Activity: 6 levels: LAYING, SITTING, STANDING, WALKING, WALKING_DOWNSTAIRS and WALKING_UPSTAIRS. It is the type of activity performed when the corresponding measurements were taken
+* Subject: Code used to identify the subjects, ranging from 1 to 30.
 
 The following variables have counterparts in the raw data.
 
